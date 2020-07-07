@@ -1,0 +1,10 @@
+sudo: required #super user level permissions
+language: generic 
+services:
+  - docker
+
+before_install:
+  - docker build -t dunphyal/docker-react -f Dockerfile.dev . #build docker file from dev file and tag with name 
+
+script:
+  - docker run -e CI=true dunphyal/docker-react npm run test #CI is used to force it to run tests once and finish the process as npm run test is normall interactive
