@@ -8,3 +8,15 @@ before_install:
 
 script:
   - docker run -e CI=true dunphyal/docker-react npm run test #CI is used to force it to run tests once and finish the process as npm run test is normall interactive
+
+deploy:
+  provider: elasticbeanstalk
+  region: "eu-west-1"
+  app: "docker-react"
+  env: "DockerReact-env"
+  bucket_name: "elasticbeanstalk-eu-west-1-507469745633"
+  bucket_path: "docker-react"
+  on:
+    branch: master #only deploy on changes to the specified branch
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
